@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'AXIOM — Parametric Architecture',
-  description: 'Interactive architectural massing study by Axiom Atelier.',
+  title: 'D—CONSTRUCT — 공간 해체 아카이브',
+  description: '엘리베이터의 시선, 이동, 마주침과 동시성을 기록한 공간 해체 아카이브.',
 };
 
 export default function RootLayout({

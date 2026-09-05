@@ -1,127 +1,127 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Grid3X3, Minus, Moon, Plus, RotateCcw, Sun } from 'lucide-react';
+import { Minus, Plus, RotateCcw } from 'lucide-react';
 
-const parameters = [
-  ['SITE', '37° 33′ N'],
-  ['F.A.R', '218.4 %'],
-  ['G.F.A', '1,842 M²'],
-  ['LEVELS', '06 + B1'],
-];
-
-const layers = [
-  { name: 'ROOF GARDEN', value: 'L06', tone: 'light' },
-  { name: 'PUBLIC FORUM', value: 'L04—05', tone: 'medium' },
-  { name: 'STUDIO GRID', value: 'L02—03', tone: 'dark' },
-  { name: 'URBAN PLINTH', value: 'L01', tone: 'black' },
-];
+const views = ['FRONT', 'SECTION', 'AXON', 'EXPLODED'];
 
 export default function Home() {
-  const [rotation, setRotation] = useState({ x: -16, y: 28 });
+  const [view, setView] = useState(3);
+  const [rotation, setRotation] = useState({ x: -12, y: 24 });
   const [zoom, setZoom] = useState(1);
-  const [dark, setDark] = useState(false);
-  const [activeLayer, setActiveLayer] = useState(1);
   const drag = useRef<{ x: number; y: number; rx: number; ry: number } | null>(null);
 
-  function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
+  function down(event: React.PointerEvent<HTMLDivElement>) {
     event.currentTarget.setPointerCapture(event.pointerId);
     drag.current = { x: event.clientX, y: event.clientY, rx: rotation.x, ry: rotation.y };
   }
 
-  function onPointerMove(event: React.PointerEvent<HTMLDivElement>) {
+  function move(event: React.PointerEvent<HTMLDivElement>) {
     if (!drag.current) return;
     setRotation({
-      x: Math.max(-35, Math.min(8, drag.current.rx - (event.clientY - drag.current.y) * 0.16)),
-      y: drag.current.ry + (event.clientX - drag.current.x) * 0.2,
+      x: Math.max(-30, Math.min(8, drag.current.rx - (event.clientY - drag.current.y) * .14)),
+      y: drag.current.ry + (event.clientX - drag.current.x) * .18,
     });
   }
 
   return (
-    <main className={dark ? 'site-shell is-dark' : 'site-shell'}>
-      <div className="blueprint-grid" aria-hidden="true" />
+    <main className="archive-shell">
+      <div className="design-grid" aria-hidden="true" />
 
-      <header className="topbar">
-        <a className="wordmark" href="#top" aria-label="Axiom Atelier home">AXIOM<span>®</span></a>
-        <div className="project-id"><span>PROJECT</span><strong>AX–041 / SEOUL</strong></div>
-        <nav aria-label="Primary navigation">
-          <a href="#system">SYSTEM</a><a href="#index">INDEX</a>
-          <button className="icon-button" onClick={() => setDark(!dark)} aria-label="Toggle color mode">
-            {dark ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
-        </nav>
+      <header className="archive-header">
+        <a href="#top" className="mark">D—CONSTRUCT<span>®</span></a>
+        <div className="header-code">SPACE DESIGN ARCHIVE / 2026</div>
+        <div className="header-meta"><span>PROJECT 01</span><b>SEOUL · KR</b></div>
       </header>
 
-      <section className="workspace" id="top">
-        <div className="hero-title">
-          <p>ARCHITECTURE / PARAMETRIC STUDY 01</p>
-          <h1>FORM<br />FOLLOWS<br /><i>PARAMETER.</i></h1>
-        </div>
-
-        <aside className="coordinates" aria-label="Project parameters">
-          <div className="coord-title"><Grid3X3 size={14} /> LIVE PARAMETERS</div>
-          {parameters.map(([label, value]) => <div className="coord-row" key={label}><span>{label}</span><b>{value}</b></div>)}
-        </aside>
-
-        <div
-          className="model-stage"
-          role="img"
-          aria-label="Interactive abstract architectural massing model. Drag to rotate."
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={() => (drag.current = null)}
-          onPointerCancel={() => (drag.current = null)}
-        >
-          <div className="orbit orbit-one" aria-hidden="true" /><div className="orbit orbit-two" aria-hidden="true" />
-          <div className="model-shadow" aria-hidden="true" />
-          <div className="massing" style={{ transform: `scale(${zoom}) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` }}>
-            {layers.map((layer, index) => (
-              <button
-                key={layer.name}
-                className={`slab slab-${index + 1} ${layer.tone} ${activeLayer === index ? 'active' : ''}`}
-                onClick={(event) => { event.stopPropagation(); setActiveLayer(index); }}
-                aria-label={`Select ${layer.name}`}
-              >
-                <span className="face front" /><span className="face back" />
-                <span className="face right" /><span className="face left" />
-                <span className="face top" /><span className="face bottom" />
-              </button>
-            ))}
-            <span className="core" aria-hidden="true" />
+      <section className="archive-board" id="top">
+        <section className="visual-field" aria-label="Elevator deconstruction study">
+          <div className="visual-heading">
+            <p>OBJECT / ELEVATOR</p>
+            <h1>MULTIPLE<br /><i>POINTS</i> OF VIEW</h1>
           </div>
-          <span className="axis axis-x">X</span><span className="axis axis-y">Y</span>
-          <div className="model-controls" aria-label="Model controls">
-            <button onClick={() => setZoom(Math.min(1.28, zoom + 0.08))} aria-label="Zoom in"><Plus size={16} /></button>
-            <button onClick={() => setZoom(Math.max(.72, zoom - 0.08))} aria-label="Zoom out"><Minus size={16} /></button>
-            <button onClick={() => { setRotation({ x: -16, y: 28 }); setZoom(1); }} aria-label="Reset view"><RotateCcw size={15} /></button>
+
+          <div className="scale scale-top">0.0&nbsp;&nbsp; 1.2&nbsp;&nbsp; 2.4&nbsp;&nbsp; 3.6&nbsp;&nbsp; 4.8 M</div>
+          <div className="scale scale-side">LEVEL 06&nbsp;&nbsp; / &nbsp;&nbsp;+ 24.800</div>
+          <div className="radar" aria-hidden="true">
+            <span /><span /><span /><span />
           </div>
-          <p className="drag-hint">DRAG TO ROTATE · SELECT A VOLUME</p>
-        </div>
 
-        <div className="callout callout-a"><span>01</span><p>ROTATED FLOOR PLATES<br /><b>+ 7.5° / LEVEL</b></p></div>
-        <div className="callout callout-b"><span>02</span><p>OPEN CIVIC VOID<br /><b>AREA 312 M²</b></p></div>
-        <div className="callout callout-c"><span>03</span><p>SOLAR ENVELOPE<br /><b>AZIMUTH 186°</b></p></div>
+          <div
+            className={`object-stage mode-${view}`}
+            onPointerDown={down}
+            onPointerMove={move}
+            onPointerUp={() => (drag.current = null)}
+            onPointerCancel={() => (drag.current = null)}
+          >
+            <div className="model" style={{ transform: `scale(${zoom}) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` }}>
+              <div className="cabin">
+                <span className="cabin-front" /><span className="cabin-side" /><span className="cabin-top" />
+                <span className="door door-a" /><span className="door door-b" />
+              </div>
+              <div className="panel panel-a"><span>06</span></div>
+              <div className="panel panel-b"><span>↑</span></div>
+              <div className="shaft-line line-a" /><div className="shaft-line line-b" />
+              <div className="pulley pulley-a" /><div className="pulley pulley-b" />
+              <div className="counterweight" />
+            </div>
+          </div>
 
-        <aside className="layer-index" id="index">
-          <div className="index-head"><span>BUILDING INDEX</span><span>04 VOLUMES</span></div>
-          {layers.map((layer, index) => (
-            <button key={layer.name} onClick={() => setActiveLayer(index)} className={activeLayer === index ? 'selected' : ''}>
-              <span>0{index + 1}</span><b>{layer.name}</b><em>{layer.value}</em>
-            </button>
-          ))}
+          <div className="annotation note-a"><b>01</b><span>DOOR SEQUENCE</span><em>OPEN / 1.8 SEC</em></div>
+          <div className="annotation note-b"><b>02</b><span>VERTICAL TRACE</span><em>24.8 M / 06 LEVELS</em></div>
+          <div className="annotation note-c"><b>03</b><span>SIGHT OVERLAP</span><em>04 SIMULTANEOUS VIEWS</em></div>
+
+          <div className="view-controls" aria-label="View controls">
+            <div className="view-tabs">
+              {views.map((item, index) => <button key={item} onClick={() => setView(index)} className={view === index ? 'active' : ''}>0{index + 1} / {item}</button>)}
+            </div>
+            <div className="zoom-controls">
+              <button onClick={() => setZoom(Math.min(1.24, zoom + .08))} aria-label="Zoom in"><Plus size={15} /></button>
+              <button onClick={() => setZoom(Math.max(.76, zoom - .08))} aria-label="Zoom out"><Minus size={15} /></button>
+              <button onClick={() => { setZoom(1); setRotation({ x: -12, y: 24 }); }} aria-label="Reset view"><RotateCcw size={14} /></button>
+            </div>
+          </div>
+        </section>
+
+        <aside className="profile-panel">
+          <div className="panel-label"><span>A / PROFILE</span><span>SUBJECT 001</span></div>
+
+          <div className="profile-card">
+            <div className="portrait-placeholder" aria-hidden="true">
+              <div className="portrait-grid" /><span>A</span>
+              <small>INTERVIEW FRAME<br />00:14:28</small>
+            </div>
+            <dl>
+              <div><dt>소속</dt><dd>스페이스디자인학과 / 4학년</dd></div>
+              <div><dt>해체 대상</dt><dd>엘리베이터</dd></div>
+              <div><dt>키워드</dt><dd>시선 · 이동 · 마주침 · 동시성</dd></div>
+            </dl>
+          </div>
+
+          <article className="text-section">
+            <p>01 / SPATIAL EXPERIENCE</p>
+            <h2>디자인대학 공간 경험</h2>
+            <div className="section-line"><span>01</span></div>
+            <p className="body-copy">엘리베이터는 단순한 이동 공간이 아니다.<br />문이 열리고 닫히는 순간마다 서로 다른 시선과 경험이 교차한다.</p>
+          </article>
+
+          <article className="text-section">
+            <p>02 / DECONSTRUCTION METHOD</p>
+            <h2>해체의 방식</h2>
+            <div className="section-line"><span>02</span></div>
+            <p className="body-copy">엘리베이터를 여러 위치와 시점에서 바라본 장면으로 분해한다.<br />서로 다른 시선을 한 화면에 중첩해 공간을 다시 구성한다.</p>
+          </article>
+
+          <article className="text-section">
+            <p>03 / SPATIAL READING</p>
+            <h2>해체의 의미</h2>
+            <div className="section-line"><span>03</span></div>
+            <p className="body-copy">하나의 공간은 하나의 시선으로만 경험되지 않는다.<br />A의 해체는 겹쳐진 경험을 통해 공간을 다시 읽는 과정이다.</p>
+          </article>
         </aside>
-
-        <div className="status-box" id="system">
-          <span className="pulse" /><div><b>MODEL STATUS / ACTIVE</b><p>GEOMETRY RESOLVED AT 1:200</p></div>
-        </div>
-
-        <div className="selected-data">
-          <span>SELECTED VOLUME</span><strong>0{activeLayer + 1} — {layers[activeLayer].name}</strong>
-          <p>STRUCTURAL GRID 8.4 × 8.4 M<br />CLEAR HEIGHT {(3.6 + activeLayer * .4).toFixed(1)} M</p>
-        </div>
       </section>
 
-      <footer><span>AXIOM ATELIER © 2026</span><span>DESIGNING SYSTEMS FOR UNFINISHED FUTURES</span><span>37.5665° N / 126.9780° E</span></footer>
+      <footer className="archive-footer"><span>DRAG OBJECT TO ROTATE · SELECT VIEW TO RECONFIGURE</span><span>RGB / 019—032—154</span><span>PAGE 01 / 01</span></footer>
     </main>
   );
 }
