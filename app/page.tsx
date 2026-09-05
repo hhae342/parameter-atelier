@@ -29,7 +29,9 @@ export default function Home() {
       <div className="design-grid" aria-hidden="true" />
 
       <header className="archive-header">
-        <a href="#top" className="mark">D—CONSTRUCT<span>®</span></a>
+        <a href="#top" className="mark" aria-label="D—CONSTRUCT home">
+          <img src="/assets/logo.gif" alt="디자인대학을 해체시키는 시선" />
+        </a>
         <div className="header-code">SPACE DESIGN ARCHIVE / 2026</div>
         <div className="header-meta"><span>PROJECT 01</span><b>SEOUL · KR</b></div>
       </header>
