@@ -123,7 +123,7 @@ export default function Home() {
         </aside>
       </section>
 
-      <footer className="archive-footer"><span>DRAG OBJECT TO ROTATE · SELECT VIEW TO RECONFIGURE</span><span>RGB / 019—032—154</span><span>PAGE 01 / 01</span></footer>
+      <footer className="archive-footer"><span>DRAG OBJECT TO ROTATE · SELECT VIEW TO RECONFIGURE</span><span>HEX / 1628D2</span><span>PAGE 01 / 01</span></footer>
     </main>
   );
 }

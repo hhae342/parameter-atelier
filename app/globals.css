@@ -4,7 +4,7 @@
 
 @font-face { font-family:'Pretendard'; src:url('/assets/PretendardVariable.woff2') format('woff2-variations'); font-weight:45 920; font-style:normal; font-display:swap; }
 
-:root { --blue:rgb(19,32,154); --blue-85:rgba(19,32,154,.85); --blue-55:rgba(19,32,154,.55); --blue-25:rgba(19,32,154,.25); --blue-12:rgba(19,32,154,.12); --blue-06:rgba(19,32,154,.06); --paper:#fff; }
+:root { --blue:#1628D2; --blue-85:rgba(22,40,210,.85); --blue-55:rgba(22,40,210,.55); --blue-25:rgba(22,40,210,.25); --blue-12:rgba(22,40,210,.12); --blue-06:rgba(22,40,210,.06); --paper:#fff; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { margin:0; background:var(--paper); color:var(--blue); font-family:'Pretendard',sans-serif; }
