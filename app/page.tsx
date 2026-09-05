@@ -40,7 +40,7 @@ export default function Home() {
         <section className="visual-field" aria-label="Elevator deconstruction study">
           <div className="visual-heading">
             <p>OBJECT / ELEVATOR</p>
-            <h1>MULTIPLE<br /><i>POINTS</i> OF VIEW</h1>
+            <h1><img src="/assets/logo-stay.png" alt="디자인대학을 해체시키는 시선" /></h1>
           </div>
 
           <div className="scale scale-top">0.0&nbsp;&nbsp; 1.2&nbsp;&nbsp; 2.4&nbsp;&nbsp; 3.6&nbsp;&nbsp; 4.8 M</div>
