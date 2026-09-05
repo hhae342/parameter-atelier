@@ -36,3 +36,6 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# raw footage sources (not served, too large for git)
+/sources/

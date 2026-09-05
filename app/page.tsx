@@ -10,6 +10,7 @@ export default function Home() {
   const [rotation, setRotation] = useState({ x: -12, y: 24 });
   const [zoom, setZoom] = useState(1);
   const drag = useRef<{ x: number; y: number; rx: number; ry: number } | null>(null);
+  const footageRef = useRef<HTMLVideoElement>(null);
 
   function down(event: React.PointerEvent<HTMLDivElement>) {
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -22,6 +23,20 @@ export default function Home() {
       x: Math.max(-30, Math.min(8, drag.current.rx - (event.clientY - drag.current.y) * .14)),
       y: drag.current.ry + (event.clientX - drag.current.x) * .18,
     });
+  }
+
+  function playFootage() {
+    const v = footageRef.current;
+    if (!v) return;
+    v.currentTime = 0;
+    v.play().catch(() => {});
+  }
+
+  function stopFootage() {
+    const v = footageRef.current;
+    if (!v) return;
+    v.pause();
+    v.currentTime = 0;
   }
 
   return (
@@ -56,17 +71,31 @@ export default function Home() {
             onPointerUp={() => (drag.current = null)}
             onPointerCancel={() => (drag.current = null)}
           >
-            <div className="model" style={{ transform: `scale(${zoom}) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` }}>
-              <div className="cabin">
-                <span className="cabin-front" /><span className="cabin-side" /><span className="cabin-top" />
-                <span className="door door-a" /><span className="door door-b" />
+            {view === 3 ? (
+              <div className="footage" onMouseEnter={playFootage} onMouseLeave={stopFootage}>
+                <video
+                  ref={footageRef}
+                  src="/assets/01-footage.mp4"
+                  poster="/assets/01-footage-poster.jpg"
+                  onEnded={stopFootage}
+                  muted
+                  playsInline
+                  preload="metadata"
+                />
               </div>
-              <div className="panel panel-a"><span>06</span></div>
-              <div className="panel panel-b"><span>↑</span></div>
-              <div className="shaft-line line-a" /><div className="shaft-line line-b" />
-              <div className="pulley pulley-a" /><div className="pulley pulley-b" />
-              <div className="counterweight" />
-            </div>
+            ) : (
+              <div className="model" style={{ transform: `scale(${zoom}) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` }}>
+                <div className="cabin">
+                  <span className="cabin-front" /><span className="cabin-side" /><span className="cabin-top" />
+                  <span className="door door-a" /><span className="door door-b" />
+                </div>
+                <div className="panel panel-a"><span>06</span></div>
+                <div className="panel panel-b"><span>↑</span></div>
+                <div className="shaft-line line-a" /><div className="shaft-line line-b" />
+                <div className="pulley pulley-a" /><div className="pulley pulley-b" />
+                <div className="counterweight" />
+              </div>
+            )}
           </div>
 
           <div className="annotation note-a"><b>01</b><span>DOOR SEQUENCE</span><em>OPEN / 1.8 SEC</em></div>
@@ -89,9 +118,8 @@ export default function Home() {
           <div className="panel-label"><span>A / PROFILE</span><span>SUBJECT 001</span></div>
 
           <div className="profile-card">
-            <div className="portrait-placeholder" aria-hidden="true">
-              <div className="portrait-grid" /><span>A</span>
-              <small>INTERVIEW FRAME<br />00:14:28</small>
+            <div className="portrait-placeholder">
+              <img src="/assets/sources-a.png" alt="A 인터뷰 인물 사진" />
             </div>
             <dl>
               <div><dt>소속</dt><dd>스페이스디자인학과 / 4학년</dd></div>
