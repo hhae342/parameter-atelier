@@ -102,21 +102,21 @@ export default function Home() {
 
           <article className="text-section">
             <p>01 / SPATIAL EXPERIENCE</p>
-            <h2>디자인대학 공간 경험</h2>
+            <h3>디자인대학 공간 경험</h3>
             <div className="section-line"><span>01</span></div>
             <p className="body-copy">엘리베이터는 단순한 이동 공간이 아니다.<br />문이 열리고 닫히는 순간마다 서로 다른 시선과 경험이 교차한다.</p>
           </article>
 
           <article className="text-section">
             <p>02 / DECONSTRUCTION METHOD</p>
-            <h2>해체의 방식</h2>
+            <h3>해체의 방식</h3>
             <div className="section-line"><span>02</span></div>
             <p className="body-copy">엘리베이터를 여러 위치와 시점에서 바라본 장면으로 분해한다.<br />서로 다른 시선을 한 화면에 중첩해 공간을 다시 구성한다.</p>
           </article>
 
           <article className="text-section">
             <p>03 / SPATIAL READING</p>
-            <h2>해체의 의미</h2>
+            <h3>해체의 의미</h3>
             <div className="section-line"><span>03</span></div>
             <p className="body-copy">하나의 공간은 하나의 시선으로만 경험되지 않는다.<br />A의 해체는 겹쳐진 경험을 통해 공간을 다시 읽는 과정이다.</p>
           </article>
